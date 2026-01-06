@@ -1,0 +1,17 @@
+services:
+  setup:
+    image: node:20.12.2
+    working_dir: /root
+    command: make setup
+    volumes:
+      - ./app:/root
+  app:
+    image: node:20.12.2
+    ports:
+      - "8080:8080"
+    working_dir: /root
+    command: make dev
+    volumes:
+      - ./app:/root
+    depends_on:
+      - setup
